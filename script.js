@@ -31,11 +31,15 @@ const restaurant = {
     },
   },
   orderDelivery: function(starterIndex, mainIndex, time, address){
-    console.log(`Order receieved! ${this.starterMenu[starterIndex]}
-    and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}!!!`)
+    // console.log(`Order receieved! ${this.starterMenu[starterIndex]}
+    // and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}!!!`)
   },
   orderPasta:function(ing1, ing2, ing3) {
-    console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
+    // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
+  },
+  orderPizza: function(mainIngredient, ...otherIngredients) {
+    //console.log(mainIngredient);
+    //console.log(otherIngredients);
   }
 };
 
@@ -47,6 +51,121 @@ restaurant.orderDelivery({
   mainIndex:2,
   starterIndex:2,
 });
+const rest1 = {
+  name: 'Capri',
+  numGuests: 0,
+};
+
+const rest2={
+  name: 'La Pizza',
+  owmer: 'Piere Rossi',
+
+};
+//OR assignment operator
+// rest2.numGuests = rest2.numGuests || 10;
+// rest1.numGuests = rest1.numGuests || 10;
+// rest1.numGuests ||=10
+// rest2.numGuests ||=10
+
+//Nullish assignment operator
+
+rest1.numGuests ??=10
+rest2.numGuests ??=10
+
+// rest1.owmer = rest1.owmer && '<ANONYMOUS>';
+// rest2.owmer = rest2.owmer && '<ANONYMOUS>';
+//AND  assignment operator
+
+rest1.owmer &&= '<ANONYMOUS>';
+rest2.owmer &&= '<ANONYMOUS>';
+
+// console.log(rest1);
+// console.log(rest2);
+
+
+/*
+//////////////////////The Nullish Coalescing Operator (??)//////////////
+// restaurant.numGuests = 0
+const guest1 = restaurant.numGuests|| 10
+console.log(guest1);
+
+//Nullish: null and undefined(NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+
+ */
+/*
+//Logical operator can use any datatype and return any datatype, short-circuting
+
+console.log(3 || 'Shaon');
+console.log('' || false);
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 0
+const guest1 = restaurant.numGuests ? restaurant.numGuests :10
+console.log(guest1);
+
+const guest2 = restaurant.numGuests||10
+console.log(guest2);
+
+console.log(0 && 'Shaon');
+
+
+console.log('-------AND--------')
+console.log(3 && 'Shaon');
+console.log('' && false);
+
+//practical example
+if(restaurant.orderPizza){
+  restaurant.orderPizza('mushroom', 'spinach')
+}
+//alternate way
+restaurant.orderPizza && restaurant.orderPizza('mushroom', 'onion')
+
+
+ */
+/*
+////////////////////////////////////////////////////
+//------------------Rest pattern and Parameters--------------
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach')
+restaurant.orderPizza('mushroom')
+
+//1) Destructuring
+//spread becauser on RIGHT side of =
+const arr = [1, 2, ...[3, 4]]
+//REST because LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5, 6, 7]
+
+console.log(a, b, others);
+
+const [pizza, ,risotto, ...otherFood]=[...restaurant.mainMenu, ...restaurant.starterMenu]
+console.log(pizza, risotto, otherFood);
+
+//Objects
+const {sat, ...weekdays}= restaurant.openingHours
+console.log(weekdays);
+
+//2) Functions
+const add = function(...numbers) {
+  let sum = 0
+  for (let i = 0; i < numbers.length; i++) {
+    sum+=numbers[i]
+  }
+  console.log(sum);
+}
+add(2,3)
+add(5,3,7,2)
+add(8,2,4,5,6,7,1,9)
+
+const x = [23, 10,2]
+add(...x)
+
+
+ */
+////////////////////////////////////////////////////
 /*
 const {name, openingHours, categories} = restaurant
 console.log(name, openingHours, categories)
@@ -112,16 +231,33 @@ console.log(...str);
 
  */
 /////////////////////////////////////////////////
-
+//realworld example
+/*
 const ingredients = [
-  prompt("Let\'s make pasta!  Ingredient 1? "),
-  prompt('Ingredient 2?'),
-  prompt('Ingredient 3?')]
+  // prompt("Let\'s make pasta!  Ingredient 1? "),
+  // prompt('Ingredient 2?'),
+  // prompt('Ingredient 3?')
+]
 console.log(ingredients);
 
 restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2])
 
 restaurant.orderPasta(...ingredients)//ES6
+
+//Objects
+const newRestaurent = {
+  foundedIn: 1999, ...restaurant,
+  founder: 'Shaon'
+};
+console.log(newRestaurent)
+//copy object then change the object
+
+const restaurantCopy = {...restaurant}
+restaurantCopy.name = 'Ristorante Italiano'
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+
+ */
 /////////////////////////////////////////////
  // const arr = [2,3,4]
 //
@@ -157,3 +293,80 @@ console.log(main, secondary);
 // const nested = [2,3,[5,6]]
 // const [i,,j] = nested
 // console.log(j)
+
+///////////////////////////////challenge 1//////////////////
+/*
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 120.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+const [player1, player2] = game.players
+console.log(player1, player2);
+
+//2.
+const [gk, ...fieldPlayers] = player1
+console.log(gk, fieldPlayers);
+//3.
+const allPlayers = [...player1, ...player2]
+console.log(allPlayers);
+//4.
+const playersFinal = [...player1, 'Thiago', 'Coutinho', 'Periscic']
+console.log('-----------Players Final-----------');
+console.log(playersFinal);
+//5.
+const {
+  odds:{ team1, x: draw, team2}
+} = game
+console.log(team1, draw, team2);
+//6.
+const printGoals = function(...players) {
+  console.log(`${players.length} goals scored`);
+}
+printGoals('Davis', 'Muller', 'Lewandowski', 'Kimich')
+printGoals('Davis', 'Muller')
+printGoals(...game.scored)
+
+//7.
+if(team1<team2){
+  console.log(`Team 1 wins`);
+}
+else if(team2<team1){
+  console.log(`Team 2 wins`);
+}*/
