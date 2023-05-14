@@ -3,7 +3,21 @@
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-
+const weekdays =['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+      close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+      close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+      close: 24,
+  },
+}
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -11,38 +25,85 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  order: function(starterIndex, mainIndex){
+//ES6 enhanced object methods
+  order(starterIndex, mainIndex){
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
   },
+  //ES6 enhanced object literals
+  openingHours,
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-  orderDelivery: function(starterIndex, mainIndex, time, address){
+
+  orderDelivery(starterIndex, mainIndex, time, address){
     // console.log(`Order receieved! ${this.starterMenu[starterIndex]}
     // and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}!!!`)
   },
-  orderPasta:function(ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`);
   },
-  orderPizza: function(mainIngredient, ...otherIngredients) {
+  orderPizza(mainIngredient, ...otherIngredients) {
     //console.log(mainIngredient);
     //console.log(otherIngredients);
   }
 };
 
+//property name
+const properties = Object.keys(openingHours)
+console.log(properties);
+console.log(`We are open on ${properties.length}`);
+
+for (const day of Object.keys(openingHours)){
+  console.log(day);
+}
+
+let openStr = (`We are open on ${properties.length} days: `);
+
+for (const day of properties){
+  openStr+= `${day} `
+}
+console.log(openStr);
+
+// property values
+
+const [values] = Object.values(openingHours);
+console.log(values);
+
+const [keys, value] = [Object.keys(openingHours) ,Object.values(openingHours)];
+console.log(keys, value);
+
+//Entire object
+const entries = Object.entries(openingHours);
+console.log(entries);
+for (const [day, {open, close}] of entries){
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
+/*
+if(restaurant.openingHours && restaurant.openingHours.mon){
+  console.log(restaurant.openingHours.mon.open);
+}
+if(restaurant.openingHours && restaurant.openingHours.fri){
+  console.log(restaurant.openingHours.fri.open);
+}
+//optional chaining
+console.log(restaurant.openingHours.thu?.open); //exist na korle direct undefined without error
+
+const days =['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+for (const day of days){
+  const open = (restaurant.openingHours[day]?.open) ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+//Optional chaining in methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+//optional chaining in arrays
+const users = [{
+  name: 'Shaon',
+  email: 'hello@shaon.com'
+}]
+console.log(users[3]?.name ?? 'User array empty');
+
+ */
+/*
+console.log(restaurant.openingHours);
 restaurant.orderDelivery(2, 2, '22:30', 'Dhaka, 1000'
 )
 restaurant.orderDelivery({
@@ -82,6 +143,8 @@ rest2.owmer &&= '<ANONYMOUS>';
 // console.log(rest1);
 // console.log(rest2);
 
+
+ */
 
 /*
 //////////////////////The Nullish Coalescing Operator (??)//////////////
