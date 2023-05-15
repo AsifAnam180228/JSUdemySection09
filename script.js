@@ -3,7 +3,7 @@
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-const weekdays =['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 // Data needed for first part of the section
 const restaurant = {
@@ -12,10 +12,10 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-//ES6 enhanced object methods
+  //ES6 enhanced object methods
 
   //ES6 enhanced object literals
-   openingHours : {
+  openingHours: {
     [weekdays[3]]: {
       open: 12,
       close: 22,
@@ -37,13 +37,13 @@ const restaurant = {
     //console.log(otherIngredients);
   },
 
-  order(starterIndex, mainIndex){
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
   },
   orderDelivery(starterIndex = 1,
-                mainIndex = 0,
-                time = '20:00',
-                address){
+    mainIndex = 0,
+    time = '20:00',
+    address) {
     console.log(`Order receieved! ${this.starterMenu[starterIndex]}
     and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}!!!`)
   },
@@ -52,7 +52,7 @@ restaurant.orderDelivery(2, 2, '22:30', 'Dhaka, 1000'
 )
 restaurant.orderDelivery({
   address: 'Dhaka',
-  starterIndex:2,
+  starterIndex: 2,
 });
 
 ////////////////Destructinng arrays/////////////////////////////
@@ -142,3 +142,119 @@ console.log('Concatenated menu: ' + menu);
 
 
  */
+
+/*
+//................................Short circuiting.............................
+
+console.log('...........OR............');
+console.log(3 || 'Hello');
+console.log('' || 'Hello');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+//restaurant.numGuests = 23;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+
+console.log('...........AND............');
+console.log(0 && 'Hello');
+console.log(7 && 'Hello');
+console.log('' && 'Hello');
+console.log(true && 0);
+console.log(undefined && null);
+
+console.log('Hello' && 23 && null && 'Hello');
+
+//Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('Mushrooms', 'Spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('Mushrooms', 'Spinach');
+*/
+
+
+/*
+//......................the nullish coalescing operator.........................
+restaurant.numGuests = 0;
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+const guestCorrect = restaurant.numGuests || 10;
+console.log(guestCorrect);
+*/
+
+
+/*
+//...............Logical Assignment.................
+const rest1 = {
+  name: 'Capri',
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+}
+
+//OR assignment operator
+//rest1.numGuests = rest1.numGuests || 10;
+//rest2.numGuests = rest2.numGuests || 10;
+
+//rest1.numGuests ||= 10;
+//rest2.numGuests ||= 10;
+
+//nullish assignment operator (null or undefined)
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+rest1.owner = rest1.owner && '<ANONYMOUS>';
+rest2.owner = rest2.owner && '<ANONYMOUS>';
+
+console.log(rest1);
+console.log(rest2);
+*/
+
+
+/*
+//...................Arrays........................
+const users = [{ name: 'Nazia', email: 'hello@jonas.io' }];
+
+console.log(users[0]?.name ?? 'User array empty');
+if (users.length > 0) console.log(users[0].name);
+else console.log('user array empty');
+
+
+//........................Looping Arrays: the for loop..................................
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el} `);
+}
+
+console.log([...menu.entries()]);
+
+
+for (let i = 0; i < restaurant.length; i++) {
+  console.log(restaurant[i]);
+}
+
+for (let i in weekdays) {
+  console.log(weekdays[i]);
+}
+
+weekdays.forEach((day) => {
+  console.log(day);
+});
+*/
+
+
+
