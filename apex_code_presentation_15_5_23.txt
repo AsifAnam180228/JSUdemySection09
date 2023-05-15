@@ -37,3 +37,80 @@ insert acc4;
 Account acc5 = new Account(Name='Test Account 5');
 insert acc5;
 
+//.............................Exception......................
+
+// Math Exception
+Double result = 10/0;
+System.debug('Result: '+result);
+
+// DML Exception
+Account accRec = new Account();
+insert accRec;
+
+
+// Null Pointer Exception
+String str;
+System.debug(str.toLowerCase());
+
+
+// throw an exception Programmatically
+throw new NullPointerException();
+
+
+//................................Try-catch-block....................
+
+System.debug('Before Exception');
+try{
+    // Math Exception
+    Double result = 10/0;
+    System.debug('Result: '+result);
+
+    // DML Exception
+    // Account accRec = new Account();
+    // insert accRec;
+    System.debug('Empty try block ');
+} catch(Exception e){
+    System.debug('Caught generic exception ');
+} finally {
+    System.debug('finally called ');
+}
+System.debug('After Exception');
+
+
+//.........................Exception Methods............................
+
+System.debug('Before Exception');
+try{
+    // Math Exception
+    Double result = 10/0;
+    System.debug('Result: '+result);
+
+    // DML Exception
+    // Account accRec = new Account();
+    // insert accRec;
+    System.debug('Empty try block ');
+} catch(Exception e){
+    system.debug('Cause '+e.getCause());
+    system.debug('Message '+e.getMessage());
+    system.debug('Line Number '+e.getLineNumber());
+    system.debug('Stack Trace '+e.getStackTraceString ());
+} finally {
+    System.debug('finally called ');
+}
+System.debug('After Exception');
+
+
+//.............................throw a custom Exception....................
+
+System.debug('Before Exception');
+try{
+   throw new ProcessException('My custom exception');
+} catch(Exception e){
+    system.debug('Cause '+e.getCause());
+    system.debug('Message '+e.getMessage());
+    system.debug('Line Number '+e.getLineNumber());
+    system.debug('Stack Trace '+e.getStackTraceString ());
+} finally {
+    System.debug('finally called ');
+}
+System.debug('After Exception');
